@@ -1,35 +1,51 @@
 <template lang="html">
-  <li>
+  <div class='list-item'>
     <rushee-profile-pic
-      style="width: 50px; height: 50px;"
+      style="width: 60px; height: 60px;"
       :rushee='rushee'/>
     <div class='main'>
       <h3>{{rushee.firstName}} {{rushee.lastName}}</h3>
     </div>
     <list-vote-ticker
-      style="width: 50px; height: 50px;"
+      style="width: 60px; height: 60px;"
       :rushee='rushee'/>
-  </li>
+  </div>
 </template>
 
 <script>
-  const RusheeProfilePic = require('./RusheeProfilePic.vue');
-  const ListVoteTicker = require('./ListVoteTicker.vue');
+import RusheeProfilePic from '@/components/partials/RusheeProfilePic'
+import ListVoteTicker from '@/components/partials/ListVoteTicker'
 
-  module.exports = {
-    props: ['rushee'],
-    components: {
-      "rushee-profile-pic": RusheeProfilePic,
-      "list-vote-ticker": ListVoteTicker
-    }
-  });
+export default {
+  props: ['rushee'],
+  components: {
+    'rushee-profile-pic': RusheeProfilePic,
+    'list-vote-ticker': ListVoteTicker
+  }
+}
 </script>
 
 <style scoped>
-
+  .list-item {
+    display: flex;
+    width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+  .list-item .main {
+    flex: 1;
+    padding-left: 1em;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+  .list-item .main h3 {
+    margin: 0;
+  }
+  .list-item list-vote-ticker {
+    flex: 1;
+    background-color: green;
+  }
 </style>
-
-
 <!--
   // an example rushee
   {

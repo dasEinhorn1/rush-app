@@ -1,25 +1,25 @@
 <template lang="html">
   <div class='profile-wrap'>
     <img class='profile' :src='rushee.pic' alt="profile picture"/>
-    <div class='icon-wrap' v-if='rushee.status != "_"'>
+    <div class='icon-wrap' v-if='rushee.status !== "_"'>
       <i :class='staticIconClass'></i>
     </div>
   </div>
 </template>
 
 <script>
-module.exports = {
+export default {
   props: ['rushee'],
   computed: {
     statusIconClass: function () {
-      const status = this.rushee.status;
+      const status = this.rushee.status
       return {
-        'fas': true,
-        'fa-check': status == 'A',
-        'fa-circle': status == 'B',
-        'fa-exclamation': status == 'E',
-        'fa-angle-double-right': status == 'F',
-        'fa-ban': status == 'Z'
+        fas: true,
+        'fa-check': status === 'A',
+        'fa-circle': status === 'B',
+        'fa-exclamation': status === 'E',
+        'fa-angle-double-right': status === 'F',
+        'fa-ban': status === 'Z'
       }
     }
   }
