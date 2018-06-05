@@ -1,16 +1,11 @@
 <template lang="html">
   <div class='ticker'>
-    <div class='ticker-cover' v-if="!hasVote && !initialized">
-      <button @click="initialized=true">Vote</button>
-    </div>
-    <div class='ticker-active' v-if="initialized">
-      <button
-        @click="(yesVoted) ? vote(0) : vote(1)"
-        :class='{active:yesVoted}'>Yes</button>
-      <button
-        @click="(noVoted) ? vote(0) : vote(-1)"
-        :class='{active:noVoted}'>No</button>
-    </div>
+    <button
+      @click="(yesVoted) ? vote(0) : vote(1)"
+      :class='{yes:true, active:yesVoted}'>Yes</button>
+    <button
+      @click="(noVoted) ? vote(0) : vote(-1)"
+      :class='{no:true, active:noVoted}'>No</button>
   </div>
 </template>
 <script>
@@ -18,27 +13,30 @@ export default {
   props: ['rushee'],
   data: function () {
     return {
-      initialized: false
+      initialized: this.rushee.votes.user.vote !== 0
     }
   },
   computed: {
-    userVote: function () {
-      return this.rushee.votes.user.vote
+    votes () {
+      return this.rushee.votes
     },
-    hasVote: function () {
+    userVote () {
+      return this.votes.user.vote
+    },
+    hasVote () {
       return this.userVote !== 0
     },
-    yesVoted: function () {
+    yesVoted () {
       return this.userVote === 1
     },
-    noVoted: function () {
+    noVoted () {
       return this.userVote === -1
     }
   },
   methods: {
-    vote: function (v) {
+    vote (v) {
       let id = this.rushee.id
-      this.$store.dispatch('vote', {
+      return this.$store.dispatch('vote', {
         id: id,
         vote: v
       })
@@ -52,29 +50,22 @@ export default {
     position: relative;
   }
 
-  .ticker div {
-    width: 100%;
-    height: 100%;
-  }
-
   button {
     background: transparent;
     border: none;
-  }
-
-  .ticker-cover button {
-    width: 100%;
-    height: 100%;
-  }
-
-  .ticker-active button {
     display: block;
     height: 50%;
     width: 100%;
     box-sizing: border-box;
   }
-  .ticker-active button.active {
+
+  button.yes.active {
     color: white;
-    background-color: black;
+    background-color: green;
+  }
+
+  button.no.active {
+    color: white;
+    background-color: red;
   }
 </style>

@@ -1,18 +1,47 @@
 <template>
   <div id="app">
-    <router-view/>
+    <main-header/>
+    <side-menu :open='open'/>
+    <main>
+      <router-view/>
+    </main>
   </div>
 </template>
 
 <script>
+import SideMenu from '@/components/partials/SideMenu'
+import MainHeader from '@/components/partials/MainHeader'
+
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    'main-header': MainHeader,
+    'side-menu': SideMenu
+  },
+  computed: {
+    open () {
+      return this.$store.sideMenuIsOpen
+    }
+  },
+  methods: {
+    toggleSideMenu () {
+      this.open = !this.open
+    }
+  }
 }
 </script>
 
 <style>
 body {
   margin: 0;
+}
+
+main {
+  max-width: 600px;
+  width: calc(100% - 80px);
+  min-width: 280px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 header {

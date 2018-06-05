@@ -1,5 +1,6 @@
 <template lang="html">
   <div class="rushee-list">
+    <!-- <list-search/> -->
     <rushee-list-item
     v-for='rushee in rushees'
     :rushee='rushee'
@@ -19,7 +20,4 @@ export default {
 </script>
 
 <style scoped>
-  .rushee-list .list-item:not(:last-child) {
-    border-bottom: 1px solid grey;
-  }
 </style>

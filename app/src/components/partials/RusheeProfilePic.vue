@@ -1,27 +1,24 @@
 <template lang="html">
   <div class='profile-wrap'>
-    <img class='profile' :src='rushee.pic' alt="profile picture"/>
-    <div class='icon-wrap' v-if='rushee.status !== "_"'>
-      <i :class='staticIconClass'></i>
+    <img class='profile' :src='rushee.pic' :alt='altText'/>
+    <div class='icon-wrap'>
+      <status-icon
+        :status='rushee.votes.status'/>
     </div>
   </div>
 </template>
 
 <script>
+import StatusIcon from '@/components/partials/StatusIcon'
 export default {
   props: ['rushee'],
   computed: {
-    statusIconClass: function () {
-      const status = this.rushee.status
-      return {
-        fas: true,
-        'fa-check': status === 'A',
-        'fa-circle': status === 'B',
-        'fa-exclamation': status === 'E',
-        'fa-angle-double-right': status === 'F',
-        'fa-ban': status === 'Z'
-      }
+    altText () {
+      return this.rushee.firstName + ' ' + this.rushee.lastName + ' profile pic'
     }
+  },
+  components: {
+    'status-icon': StatusIcon
   }
 }
 </script>
@@ -35,12 +32,14 @@ export default {
   }
   .profile-wrap {
     position: relative;
+    overflow:hidden;
+    font-size:.8em;
   }
   .icon-wrap {
     position: absolute;
     z-index: 1;
-    width: 10%;
-    height:10%;
+    width: 25%;
+    height: 25%;
     top: 100%;
     left: 100%;
     transform: translate(-100%, -100%);

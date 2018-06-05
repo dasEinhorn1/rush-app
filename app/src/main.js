@@ -8,10 +8,10 @@ import RushApi from './helpers/RushApiMock'
 
 Vue.config.productionTip = false
 Vue.use(Vuex)
-
 const store = new Vuex.Store({
   state: {
-    rushees: []
+    rushees: [],
+    sideMenuIsOpen: false
   },
   mutations: {
     updateRusheeVote (state, payload) {
@@ -21,6 +21,9 @@ const store = new Vuex.Store({
     updateRushees (state, payload) {
       console.log('LOADING')
       state.rushees = payload
+    },
+    toggleSideMenu (state) {
+      state.sideMenuIsOpen = !state.sideMenuIsOpen
     }
   },
   actions: {
@@ -35,6 +38,9 @@ const store = new Vuex.Store({
         .then((response) => {
           commit('updateRusheeVote', {id: payload.id, votes: response})
         })
+    },
+    toggleSideMenu ({ commit }) {
+      commit('toggleSideMenu')
     }
   }
 })
@@ -44,7 +50,9 @@ new Vue({
   el: '#app',
   router,
   store,
-  components: { App },
+  components: {
+    App
+  },
   template: '<App/>',
   created () {
     this.$store.dispatch('loadRushees')

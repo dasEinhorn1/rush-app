@@ -17,12 +17,16 @@ module.exports = {
   ],
   // required to lint *.vue files
   plugins: [
-    'vue'
+    'vue',
+    'chai-friendly'
   ],
   // add your custom rules here
   rules: {
     // allow async-await
     'generator-star-spacing': 'off',
+    // fix chai stuff
+    'no-unused-expressions': 0,
+    'chai-friendly/no-unused-expressions': 2,
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
   }

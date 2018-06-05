@@ -1,42 +1,13 @@
-const DELAY = 1000
+import Rushee from '@/fixtures/RusheeFixture'
+import { StatusType } from '@/helpers/StatusConfig'
 
-let fakeIds = 0
+const DELAY = 200
 
-function fakeRushee (id, data = {}) {
-  if (id === undefined) {
-    id = fakeIds
-    fakeIds++
-  }
-  return {
-    id: id,
-    firstName: data.firstName || 'Fake',
-    lastName: data.lastName || 'Rushee',
-    pic: data.pic || 'https://images-na.ssl-images-amazon.com/images/I/51kpW-tYzRL.jpg',
-    phone: data.phone || '',
-    year: data.year || Math.floor(Math.random() * 3) + 1,
-    major: data.major || 'Undecided',
-    status: '_',
-    votes: {
-      totals: {
-        yes: 0,
-        no: 0
-      },
-      user: {
-        vote: 0
-      }
-    }
-  }
+function fakeRusheeList (count = 10) {
+  return Rushee.fakeMany(count, 0, { randomizeVotes: true })
 }
 
-function fakeRusheeList (seed = false) {
-  let fakeRushees = []
-  for (let i = 0; i < 10; i++) {
-    fakeRushees.push(fakeRushee((seed) ? i : undefined))
-  }
-  return fakeRushees
-}
-
-const fakeRushees = fakeRusheeList(0)
+const fakeRushees = fakeRusheeList(30)
 
 export default {
   getRushees: (queryParams) => {
@@ -58,7 +29,7 @@ export default {
   },
   createRushee: (data) => {
     return new Promise((resolve, reject) => {
-      setTimeout(() => resolve(fakeRushee(data.id, data)), DELAY)
+      setTimeout(() => resolve(Rushee.fake(data.id, data)), DELAY)
     })
   },
   updateRushee: (id, data) => {
@@ -77,18 +48,13 @@ export default {
   },
   vote: (id, vote) => {
     return new Promise((resolve, reject) => {
-      console.log(id)
-      fakeRushees.forEach(rushee => {
-        console.log(rushee)
-      })
       setTimeout(() => {
-        let i = fakeRushees.findIndex(rushee => {
+        let rushee = fakeRushees.find(rushee => {
           return rushee.id === id
         })
-        console.log(i)
-        if (i > -1) {
-          let rushee = fakeRushees[i]
+        if (rushee) {
           if (vote !== rushee.votes.user.vote) {
+            console.log(vote)
             if (vote === 1) {
               rushee.votes.totals.yes++
               if (rushee.votes.user.vote === -1) {
@@ -107,6 +73,8 @@ export default {
               rushee.votes.totals.no++
             }
             rushee.votes.user.vote = vote
+            rushee.votes.status = StatusType.fromVotes(rushee.votes.totals.yes,
+              rushee.votes.totals.no)
           }
           resolve(rushee.votes)
         } else {
