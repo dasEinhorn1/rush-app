@@ -31,6 +31,6 @@ export default {
     font-size: 1.2em;
     border-radius: 2px;
     box-sizing: border-box;
-    margin-bottom: 10px; 
+    margin-bottom: 10px;
   }
 </style>

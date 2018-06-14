@@ -1,5 +1,6 @@
 <template lang="html">
   <div class="">
+    <list-search />
     <rushee-list
       :rushees='rushees'/>
   </div>
@@ -20,9 +21,7 @@ export default {
 </script>
 
 <style scoped>
-  .rushee-list{
-    overflow-y: scroll;
-    max-height: calc(100vh - 60px);
-    position: relative;
-  }
+.rushee-list{
+  max-height: calc(100vh - 40px);
+}
 </style>

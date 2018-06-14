@@ -25,7 +25,7 @@ export default {
     classObj () {
       return {
         'side-menu-wrap': true,
-        open: this.$store.state.sideMenuIsOpen
+        'is-open': this.$store.state.sideMenuIsOpen
       }
     }
   },
@@ -38,11 +38,11 @@ export default {
 </script>
 
 <style lang="css">
-  div.side-menu-wrap:not(.open) {
+  div.side-menu-wrap:not(.is-open) {
     background-color: transparent;
     width: 0;
   }
-  div.side-menu-wrap:not(.open) nav.side-menu {
+  div.side-menu-wrap:not(.is-open) nav.side-menu {
     width: 0;
   }
   div.side-menu-wrap {
