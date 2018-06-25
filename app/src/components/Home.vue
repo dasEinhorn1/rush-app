@@ -2,20 +2,22 @@
   <div class="">
     <list-search />
     <rushee-list
-      :rushees='rushees'/>
+      :rushees='getRelevantRushees'/>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapGetters } from 'vuex'
 import RusheeList from '@/components/partials/RusheeList'
+import ListSearch from '@/components/partials/ListSearch'
 
 export default {
   computed: {
-    ...mapState(['rushees'])
+    ...mapGetters(['getRelevantRushees'])
   },
   components: {
-    'rushee-list': RusheeList
+    RusheeList,
+    ListSearch
   }
 }
 </script>

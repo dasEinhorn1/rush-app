@@ -83,4 +83,6 @@ const Status = {
   }
 }
 
-export { StatusType, Status }
+const getRusheeStatus = (rushee) => rushee.votes.status
+
+export { StatusType, Status, getRusheeStatus }
