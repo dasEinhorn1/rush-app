@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import MenuToggleButton from '@/components/partials/MenuToggleButton'
+import MenuToggleButton from './buttons/MenuToggleButton'
 
 export default {
   components: {

@@ -7,27 +7,33 @@
         :value='name'
         v-bind='$attrs'
         v-model='filters'/>
-      <slot></slot>
+      <slot>{{ name | readable }}</slot>
     </label>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
+import Filters from '@/helpers/Filters'
+
 export default {
   name: "FilterInput",
-  inheritAttributes: false,
-  props: ['name', 'group'],
+  inheritAttrs: false,
+  props: ['name', 'checked'],
   computed: {
     filters: {
       set (filters) {
-        console.log(filters);
-        console.log(this.name);
         this.$store.commit('SET_FILTER', { filters })
       },
       get () {
         return this.$store.state.filters
       }
+    },
+  },
+  filters: {
+    readable (value) {
+      return value.replace(/[A-Z]/g, (m) => ' ' + m)
+        .replace(/^[a-z]/, (m) => m.toUpperCase())
     }
   }
 }

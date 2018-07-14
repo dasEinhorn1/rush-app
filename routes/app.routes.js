@@ -11,4 +11,4 @@ router.get('/', function (req, res, next) {
   res.sendFile('../app/index.html', { root: __dirname })
 })
 
-module.export = router
+module.exports = router

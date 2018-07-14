@@ -1,29 +1,28 @@
 <template lang="html">
-  <div>
-    <slot></slot>
+  <div class="filter-group">
+    <h4 class="header"><slot name="header">{{ name | readable }}</slot></h4>
+    <div class='filters'>
+      <slot></slot>
+    </div>
   </div>
 </template>
 
 <script>
 import FilterInput from './FilterInput'
 export default {
-  props: ['name'],
   components: {
     FilterInput
   },
-  computed: {
-    name () {
-      return this.group.name
-    },
-    readable () {
-      return (
-        this.name
-          .replace(/[A-Z]/g, (m) => ' ' + m)
-          .replace(/^[a-z]/, (m) => m.toUpperCase())
-      )
-    },
-    filters () {
-      return Object.entries(this.group.filters).map(([name]) => ({ name, group: this.name }))
+  props: {
+    name: {
+      type: String,
+      required: true
+    }
+  },
+  filters: {
+    readable (value) {
+      return value.replace(/[A-Z]/g, (m) => ' ' + m)
+        .replace(/^[a-z]/, (m) => m.toUpperCase())
     }
   },
   methods: {
@@ -40,4 +39,10 @@ export default {
 </script>
 
 <style lang="css">
+.header {
+  margin-bottom: 8px;
+}
+.filters {
+  padding-left: 8px;
+}
 </style>

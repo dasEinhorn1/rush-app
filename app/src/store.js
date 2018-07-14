@@ -9,7 +9,7 @@ Vue.use(Vuex)
 export const store = new Vuex.Store({
   state: {
     rushees: [],
-    filters: [],
+    filters: [...Filters.default()],
     search: {
       query: '',
       isCaseSensitive: false
@@ -27,6 +27,7 @@ export const store = new Vuex.Store({
         ? state.rushees : state.rushees.map(addFullName).filter(rushee => (
           applyCaseSensitivity(rushee.fullName)
             .includes(applyCaseSensitivity(state.search.query))))
+      return queriedRushees
     },
     filteredRushees: (state, getters) => {
       const availableFilters = Filters.available()

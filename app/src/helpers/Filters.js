@@ -26,6 +26,9 @@ const filters = {
   fastTrack: makeStatusFilter("fastTrack", StatusType.FAST_TRACK),
   blackballed: makeStatusFilter("blackballed", StatusType.BLACK_BALL),
   noStatus: makeStatusFilter("noStatus", StatusType.NONE),
+  upForVote: Filter("upForVote", "status", (r) =>
+    getRusheeStatus(r) === StatusType.FAST_TRACK
+    || getRusheeStatus(r) === StatusType.NONE),
   firstYear: makeYearFilter("firstYear", 1),
   secondYear: makeYearFilter("secondYear", 2),
   thirdYear: makeYearFilter("thirdYear", 3),
@@ -34,23 +37,6 @@ const filters = {
 
 const groupNames = ["status", "year"]
 
-const filterGroups = {
-  status: {
-    name: "status",
-    filters: [
-      "hasBid",
-      "accepted",
-      "bidEligible",
-      "fastTrack",
-      "blackballed",
-      "noStatus"
-    ],
-  },
-  year: {
-    filters: []
-  }
-}
-
 export default {
   available () {
     return filters
@@ -58,10 +44,15 @@ export default {
   names () {
     return Object.keys(filters)
   },
-  groupedFiltersNames () {
+  grouped () {
     return Object.keys(filters).map(name => filters[name])
-      .reduce((groupNames, filter) => {
-
+      .reduce((groups, filter) => {
+        if (!groups[filter.group]) groups[filter.group] = []
+        groups[filter.group].push(filter)
+        return groups
       }, {})
+  },
+  default () {
+    return ["upForVote"]
   }
 }

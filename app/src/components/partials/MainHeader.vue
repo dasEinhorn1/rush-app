@@ -1,12 +1,12 @@
 <template lang="html">
   <header class='main-header'>
-    <menu-toggle-button icon='bars'/>
+    <menu-toggle-button size="1.5em"/>
     <h1>Rush App</h1>
   </header>
 </template>
 
 <script>
-import MenuToggleButton from '@/components/partials/MenuToggleButton'
+import MenuToggleButton from './buttons/MenuToggleButton'
 export default {
   components: {
     MenuToggleButton

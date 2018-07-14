@@ -1,16 +1,14 @@
 <template lang="html">
-  <button @click="toggleMenu">
-    <font-awesome-icon :icon='icon' transform="grow-7"/>
-  </button>
+  <icon-button @click="toggleMenu" icon="bars" v-bind="$attrs" v-on="$listeners"/>
 </template>
 
 <script>
-import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
+import IconButton from "./IconButton"
 
 export default {
-  props: ['icon'],
+  inheritAttrs: false,
   components: {
-    FontAwesomeIcon
+    IconButton
   },
   methods: {
     toggleMenu: function () {
@@ -28,5 +26,8 @@ button {
   background-color: transparent;
   border: none;
   box-sizing: border-box;
+}
+button:hover {
+  text-decoration: none;
 }
 </style>
