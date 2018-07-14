@@ -1,14 +1,10 @@
 <template lang="html">
   <div>
-    <filter-group v-for='group in filterGroups'
-      :group='group'
-      :key='group.name'/>
+    <filter-group v-for:>
   </div>
 </template>
 
 <script>
-import FilterGroup from './FilterGroup'
-import { Filters } from '@/helpers/Filters'
 
 export default {
   components: {

@@ -1,17 +1,13 @@
 <template lang="html">
   <div>
-    <h3>{{ readable }}</h3>
-    <filter-input
-      v-for='filter in filters'
-      :key='filter.name'
-      :filter='filter'/>
+    <slot></slot>
   </div>
 </template>
 
 <script>
 import FilterInput from './FilterInput'
 export default {
-  props: ['group', 'value'],
+  props: ['name'],
   components: {
     FilterInput
   },
@@ -34,6 +30,11 @@ export default {
     filterValue (filterName) {
       return this.value.find(f => f.name === this.filterName)
     }
+  },
+  created () {
+    const vm = this
+    this.$children.filter(child => child.$options.name === "FilterInput")
+      .forEach(child => child.group = vm.name)
   }
 }
 </script>

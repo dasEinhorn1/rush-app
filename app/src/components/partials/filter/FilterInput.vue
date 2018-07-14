@@ -1,41 +1,33 @@
 <template lang="html">
   <div>
-    <input
-      type='checkbox'
-      :id='dashed'
-      :value='filter'
-      v-model='filters'/>
-    <label :for='dashed'>{{readable}}</label>
+    <label>
+      <input
+        type='checkbox'
+        :name='name'
+        :value='name'
+        v-bind='$attrs'
+        v-model='filters'/>
+      <slot></slot>
+    </label>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
 export default {
-  props: ['filter'],
+  name: "FilterInput",
+  inheritAttributes: false,
+  props: ['name', 'group'],
   computed: {
-    ...mapState(['search']),
-    name () {
-      return this.filter.name
-    },
-    readable () {
-      return this.name.replace(/[A-Z]/g, (m) => ' ' + m.toLowerCase())
-    },
-    dashed () {
-      return this.name.replace(/[A-Z]/g, (m) => '-' + m.toLowerCase())
-    },
     filters: {
       set (filters) {
-        this.$store.commit('setFilters', { filters })
+        console.log(filters);
+        console.log(this.name);
+        this.$store.commit('SET_FILTER', { filters })
       },
       get () {
-        return this.search.filters
+        return this.$store.state.filters
       }
-    }
-  },
-  methods: {
-    updateFilters () {
-      console.log(this.value)
     }
   }
 }
