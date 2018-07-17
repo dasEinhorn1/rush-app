@@ -1,5 +1,8 @@
 const express = require('express')
 const Rushee = require('../api/models/rushee.model')
+
+const testDB = require('../localDB.js')
+
 /*
  Feel free to split up routes more if you want
 */
@@ -28,6 +31,14 @@ router.get('/rushees', function (req, res, next) {
     }
 
     var testRushee = Rushee(dummyData, dummyVotes)
+
+    testDB.query("SELECT * FROM Rushee", function(err, results) {
+        if (err) {
+            console.log(error)
+        } else {
+            console.log(results)
+        }
+    });
     res.status(200).send({"rushee": JSON.stringify(testRushee)})
 })
 
