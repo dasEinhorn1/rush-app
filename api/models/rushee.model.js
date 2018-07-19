@@ -1,6 +1,6 @@
 const VoteModel = require('./vote.model')
 
-function Rushee( data = {}, voteInfo = {} ) {
+function Rushee( data = {} ) {
 
     if (data.Name !== undefined) {
         var splitName = data.Name.split(" ")
@@ -14,7 +14,7 @@ function Rushee( data = {}, voteInfo = {} ) {
         phone: data.PhoneNumber,
         year: data.Year,
         major: data.Major,
-        votes: VoteModel(voteInfo, data.BidStatus)
+        votes: VoteModel(data.YesTotal, data.NoTotal, data.UserVote, data.BidStatus)
     };
 }
 

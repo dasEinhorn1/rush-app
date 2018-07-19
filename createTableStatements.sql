@@ -16,6 +16,8 @@ CREATE TABLE Rushee(
 	Major			varchar(50),
 	PointOfContact	varchar(50),
 	BidStatus		ENUM('none', 'has-bid', 'accepted-bid'),
+	YesTotal		int,
+	NoTotal			int,
 	PRIMARY KEY(GTID),
 	UNIQUE(PhoneNumber),
 	UNIQUE(Picture),

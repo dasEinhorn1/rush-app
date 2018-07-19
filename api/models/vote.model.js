@@ -1,17 +1,17 @@
-function VoteModel ( voteInfo = {}, bidStatus ) {
+function VoteModel ( yesTotal, noTotal, userVote, bidStatus ) {
     var status = "_"
     if (bidStatus === "has-bid") {
         status = StatusType.HAS_BID
     } else if (bidStatus === "accepted-bid") {
         status = StatusType.ACCEPTED
     } else {
-        status = StatusType.fromVotes(voteInfo.yes, voteInfo.no)
+        status = StatusType.fromVotes(yesTotal, noTotal)
     }
 
     return {
         status: status,
-        total: NestedTotal(voteInfo.yes, voteInfo.no),
-        userVote: voteInfo.userVote
+        total: NestedTotal(yesTotal, noTotal),
+        userVote: userVote
     }
 }
 
