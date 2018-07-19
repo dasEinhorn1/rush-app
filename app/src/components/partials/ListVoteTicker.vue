@@ -1,16 +1,27 @@
 <template lang="html">
   <div class='ticker'>
-    <button
+    <div class="lock-overlay" v-if="isLocked">
+      <font-awesome-icon class="lock-overlay__icon" :icon='statusIcon'/>
+    </div>
+    <icon-button
       @click="(yesVoted) ? vote(0) : vote(1)"
-      :class='{yes:true, active:yesVoted}'>Yes</button>
-    <button
+      :class='{yes:true, "vote-button":true, active:yesVoted}'
+      icon='thumbs-up'
+      :disabled="isLocked"/>
+    <icon-button
       @click="(noVoted) ? vote(0) : vote(-1)"
-      :class='{no:true, active:noVoted}'>No</button>
+      :class='{no:true, "vote-button":true, active:noVoted}'
+      icon='thumbs-down'
+      :disabled="isLocked"/>
   </div>
 </template>
 <script>
+import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
+import IconButton from './buttons/IconButton'
+import { StatusType, Status } from '@/helpers/StatusConfig'
 export default {
   props: ['rushee'],
+  components: { IconButton, FontAwesomeIcon },
   data: function () {
     return {
       initialized: this.rushee.votes.user.vote !== 0
@@ -31,6 +42,17 @@ export default {
     },
     noVoted () {
       return this.userVote === -1
+    },
+    isLocked () {
+      return [
+          StatusType.HAS_BID,
+          StatusType.ACCEPTED,
+          StatusType.ELIGIBLE,
+          StatusType.BLACK_BALL,
+        ].includes(this.rushee.votes.status)
+    },
+    statusIcon () {
+      return Status.icon(this.rushee.votes.status)
     }
   },
   methods: {
@@ -50,6 +72,19 @@ export default {
     position: relative;
   }
 
+  .lock-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    background-color: white;
+  }
+  .lock-overlay__icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+  }
   button {
     background: transparent;
     border: none;
@@ -60,12 +95,12 @@ export default {
   }
 
   button.yes.active {
-    color: white;
-    background-color: green;
+    color: green;
+    /* background-color: green; */
   }
 
   button.no.active {
-    color: white;
-    background-color: red;
+    color: red;
+    /* background-color: red; */
   }
 </style>

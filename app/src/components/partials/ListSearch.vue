@@ -1,11 +1,11 @@
 <template lang="html">
-  <form class='list-search'>
+  <form class='list-search' @submit.prevent="">
     <div class="search-bar">
       <label for="rushee-search">Search:</label>
       <input id="rushee-search" v-model="query" placeholder='Rushee name'/>
     </div>
     <div>
-      Filters: <span v-for="filter in filters">{{filter}}</span>
+      Filters: <span v-for="(filter,n) in filters" :key="n">{{filter}}</span>
       <icon-button
         icon="filter"
         size="1em"
