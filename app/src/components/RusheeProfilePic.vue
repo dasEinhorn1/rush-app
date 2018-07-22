@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import StatusIcon from '@/components/partials/StatusIcon'
+import StatusIcon from './StatusIcon'
 export default {
   props: ['rushee'],
   computed: {

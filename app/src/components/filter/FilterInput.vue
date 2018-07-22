@@ -1,15 +1,13 @@
 <template lang="html">
-  <div>
-    <label>
-      <input
-        type='checkbox'
-        :name='name'
-        :value='name'
-        v-bind='$attrs'
-        v-model='filters'/>
-      <slot>{{ name | readable }}</slot>
-    </label>
-  </div>
+  <label style="display:block">
+    <input
+      type='checkbox'
+      :name='name'
+      :value='name'
+      v-bind='$attrs'
+      v-model='filters'>
+    <slot>{{ name | readable }}</slot>
+  </label>
 </template>
 
 <script>

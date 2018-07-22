@@ -29,9 +29,6 @@ export default {
     styles () {
       return { "font-size": this.size }
     }
-  },
-  created() {
-    console.log(this.$attrs, this.$listeners)
   }
 }
 </script>
@@ -42,8 +39,6 @@ button {
   height: 100%;
   color: inherit;
   background-color: transparent;
-  border: 2px solid transparent;
-  border-radius: 4px;
   box-sizing: border-box;
   /* transition: border-color .5s; */
 }

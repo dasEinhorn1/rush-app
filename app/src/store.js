@@ -8,7 +8,8 @@ Vue.use(Vuex)
 
 export const store = new Vuex.Store({
   state: {
-    rushees: [],
+    rushees: {},
+    rusheeIds: [],
     filters: [...Filters.default()],
     search: {
       query: '',
@@ -17,14 +18,18 @@ export const store = new Vuex.Store({
     sideMenuIsOpen: false
   },
   getters: {
+    getRushee (state) {
+      return id => state.rushees[id]
+    },
     queriedRushees (state) {
-      if (state.search.query === '') return state.rushees
+      const rusheeList = state.rusheeIds.map(id => state.rushees[id])
+      if (state.search.query === '') return rusheeList
       let applyCaseSensitivity = (text) => (state.isCaseSensitive) ? text : text.toUpperCase()
       let getFullName = (rushee) => rushee.firstName + ' ' + rushee.lastName
       let addFullName = (rushee) => ({...rushee, fullName: getFullName(rushee)})
       // apply the query if there is one
       let queriedRushees = (state.search.query === '')
-        ? state.rushees : state.rushees.map(addFullName).filter(rushee => (
+        ? rusheeList : rusheeList.map(addFullName).filter(rushee => (
           applyCaseSensitivity(rushee.fullName)
             .includes(applyCaseSensitivity(state.search.query))))
       return queriedRushees
@@ -58,13 +63,16 @@ export const store = new Vuex.Store({
   mutations: {
     // TODO: change over to types.MUTATION_NAME
     updateRusheeVote (state, payload) {
-      state.rushees
+      state.rusheeIds.map(id => state.rushees[id])
         .find(rushee => rushee.id === payload.id).votes = payload.votes
     },
     // TODO: change over to types.MUTATION_NAME
-    updateRushees (state, payload) {
+    addRushees (state, payload) {
       console.log('LOADING')
-      state.rushees = payload
+      payload.forEach(rushee => {
+        Vue.set(state.rushees, rushee.id, rushee)
+        state.rusheeIds.push(rushee.id)
+      })
     },
     // TODO: change over to types.MUTATION_NAME
     toggleSideMenu (state) {
@@ -89,7 +97,7 @@ export const store = new Vuex.Store({
     loadRushees ({ commit }, payload = {}) {
       RushApi.getRushees(payload.queryParams)
         .then((response) => {
-          commit('updateRushees', response)
+          commit('addRushees', response)
         })
     },
     vote ({ commit }, payload) {

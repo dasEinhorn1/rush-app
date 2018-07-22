@@ -7,7 +7,7 @@ function fakeRusheeList (count = 10) {
   return Rushee.fakeMany(count, 0, { randomizeVotes: true })
 }
 
-const fakeRushees = fakeRusheeList(50)
+const fakeRushees = fakeRusheeList(500)
 
 export default {
   getRushees: (queryParams) => {

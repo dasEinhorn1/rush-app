@@ -17,7 +17,7 @@
 </template>
 <script>
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
-import IconButton from './buttons/IconButton'
+import IconButton from '@ui/buttons/IconButton'
 import { StatusType, Status } from '@/helpers/StatusConfig'
 export default {
   props: ['rushee'],

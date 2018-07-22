@@ -1,13 +1,13 @@
 <template lang="html">
-  <div :class='classObj' @click='close'>
+  <div class="side-menu-wrap" @click='$emit("close")'>
     <nav class='side-menu' @click.stop=''>
-      <li>
-        <menu-toggle-button icon='chevron-left'/>
-      </li>
-      <li @click='close'>
+      <!-- <div class="">
+        <icon-button class="close-button" icon='chevron-left' @click='$emit("close")'/>
+      </li> -->
+      <li @click='$emit("close")'>
         <router-link to="/" tag="a">Rushees</router-link>
       </li>
-      <li @click='close'>
+      <li @click='$emit("close")'>
         <router-link to="/login" tag="a">Login</router-link>
       </li>
     </nav>
@@ -15,36 +15,16 @@
 </template>
 
 <script>
-import MenuToggleButton from './buttons/MenuToggleButton'
+import IconButton from '@ui/buttons/IconButton'
 
 export default {
   components: {
-    MenuToggleButton
-  },
-  computed: {
-    classObj () {
-      return {
-        'side-menu-wrap': true,
-        'is-open': this.$store.state.sideMenuIsOpen
-      }
-    }
-  },
-  methods: {
-    close () {
-      this.$store.dispatch('toggleSideMenu')
-    }
+    IconButton
   }
 }
 </script>
 
 <style lang="css">
-  div.side-menu-wrap:not(.is-open) {
-    background-color: transparent;
-    width: 0;
-  }
-  div.side-menu-wrap:not(.is-open) nav.side-menu {
-    width: 0;
-  }
   div.side-menu-wrap {
     position: fixed;
     width: 100%;
@@ -70,5 +50,8 @@ export default {
   nav li {
     text-decoration: none;
     list-style: none;
+  }
+  .close-button {
+    position: absolute;
   }
 </style>

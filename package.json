@@ -29,6 +29,7 @@
     "@fortawesome/fontawesome-free-solid": "^5.0.13",
     "@fortawesome/vue-fontawesome": "0.0.22",
     "express": "^4.16.3",
+    "lodash.debounce": "^4.0.8",
     "mysql": "^2.15.0",
     "vue": "^2.5.16",
     "vue-router": "^3.0.1",

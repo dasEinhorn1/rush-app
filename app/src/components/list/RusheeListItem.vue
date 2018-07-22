@@ -4,9 +4,11 @@
     style="width: 40px; height: 60px;"
     :rushee='rushee'/>
     <rushee-profile-pic
+      @click="goToRusheePage"
       style="width: 60px; height: 60px;"
       :rushee='rushee'/>
-    <div class='main'>
+    <div class='main'
+      @click="goToRusheePage">
       <h3>{{rushee.firstName}} {{rushee.lastName}}</h3>
       <div class="main__details">
         <p class="main__details__detail">{{ rushee.year | yearToText }}</p>
@@ -17,8 +19,8 @@
 </template>
 
 <script>
-import RusheeProfilePic from '@/components/partials/RusheeProfilePic'
-import ListVoteTicker from '@/components/partials/ListVoteTicker'
+import RusheeProfilePic from '../RusheeProfilePic'
+import ListVoteTicker from './ListVoteTicker'
 
 export default {
   props: ['rushee'],
@@ -38,6 +40,11 @@ export default {
   components: {
     'rushee-profile-pic': RusheeProfilePic,
     'list-vote-ticker': ListVoteTicker
+  },
+  methods: {
+    goToRusheePage () {
+      this.$router.push({ path: `rushees/${this.rushee.id}` })
+    }
   }
 }
 </script>
@@ -45,10 +52,10 @@ export default {
 <style scoped>
   .list-item {
     display: flex;
-    width: calc(100% - 6px);
     overflow: hidden;
     box-sizing: border-box;
     margin: 5px;
+    border-radius: 4px;
     box-shadow: 0px 0px 3px 1px grey;
   }
   .list-item .main {
