@@ -1,7 +1,7 @@
 <template lang="html">
   <form class='list-search' @submit.prevent="">
     <div class="search-bar">
-      <search-input v-model="quickQuery" placeholder='Rushee name'></search-input>
+      <search-input v-model="quickQuery" :placeholder='placeholder'></search-input>
     </div>
   </form>
 </template>
@@ -14,6 +14,12 @@ const debounce = require('lodash.debounce')
 export default {
   components: {
     SearchInput
+  },
+  props: {
+    placeholder: {
+      type: String,
+      default: "Search"
+    }
   },
   data: () => ({
     quickQuery: "",

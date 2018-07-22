@@ -5,8 +5,8 @@ function connectDatabase() {
     if (!db) {
         db = mysql.createConnection({
             host: 'localhost',
-            user: 'bglowniak',
-            password: 'password',
+            user: 'rushAppAdmin',
+            password: 'horriblePassword69420!',
             database: 'rushapp'
         });
 

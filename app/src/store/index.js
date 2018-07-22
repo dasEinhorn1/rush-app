@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import RushApi from './helpers/RushApiMock'
+import RushApi from '@/helpers/RushApi'
 
-import Filters from './helpers/Filters'
+import Filters from '@/helpers/Filters'
 
 Vue.use(Vuex)
 
@@ -10,12 +10,11 @@ export const store = new Vuex.Store({
   state: {
     rushees: {},
     rusheeIds: [],
-    filters: [...Filters.default()],
+    filters: Filters.default,
     search: {
       query: '',
       isCaseSensitive: false
     },
-    sideMenuIsOpen: false
   },
   getters: {
     getRushee (state) {
@@ -35,25 +34,15 @@ export const store = new Vuex.Store({
       return queriedRushees
     },
     filteredRushees: (state, getters) => {
-      const availableFilters = Filters.available()
       if (state.filters.length === 0) {
         return getters.queriedRushees
       }
       const groupedFilters = state.filters
-        .map(name => availableFilters[name]) // gets all filters to apply (the actual objects)
-        .filter(f => f !== undefined)
-        .reduce((groups, f) => {       // reduces the filters into groups {groupName: [...filtersInGroup], ...}
-          if (!groups[f.group]) groups[f.group] = []
-          groups[f.group].push(f)
-          return groups
-        }, {})
-      return getters.queriedRushees.filter(rushee => {  // check each item individually
-        return Object.values(groupedFilters).reduce((ands, group) => {
-          return ands && group.reduce((ors, filter) => {
-            return ors || filter.apply(rushee)
-          }, false)
-        }, true)
-      })
+        .map(id => Filters.available[id]) // gets all filters to apply (the actual objects)
+        .filter(f => f !== undefined) // remove any invalid filters
+        .reduce(Filters.toGrouped, {}) // reduce the filter list to { groupName: [...filters] }
+      // curried function to apply all filters
+      return getters.queriedRushees.filter(Filters.applyAll(groupedFilters))
     },
 
     getRelevantRushees: (state, getters) => {
@@ -68,29 +57,22 @@ export const store = new Vuex.Store({
     },
     // TODO: change over to types.MUTATION_NAME
     addRushees (state, payload) {
-      console.log('LOADING')
       payload.forEach(rushee => {
         Vue.set(state.rushees, rushee.id, rushee)
         state.rusheeIds.push(rushee.id)
       })
     },
     // TODO: change over to types.MUTATION_NAME
-    toggleSideMenu (state) {
-      state.sideMenuIsOpen = !state.sideMenuIsOpen
-    },
-    // TODO: change over to types.MUTATION_NAME
     setSearchQuery (state, payload) {
       state.search.query = payload.query
     },
     // TODO: change over to types.MUTATION_NAME
-    ["SET_FILTER"] (state, payload) {
+    ["SET_FILTERS"] (state, payload) {
       state.filters = payload.filters
     },
-    ["REGISTER_FILTER"] (state, filter) {
-      if (!_availableFilters[filter.name]) {
-        _availableFilterNames.push(filter.name)
-      }
-      _availableFilters[name] = filter
+    ["REMOVE_FILTER"] (state, payload) {
+      const { id } = payload
+      state.filters = state.filters.filter(f => f.id !== id)
     },
   },
   actions: {
@@ -105,9 +87,6 @@ export const store = new Vuex.Store({
         .then((response) => {
           commit('updateRusheeVote', {id: payload.id, votes: response})
         })
-    },
-    toggleSideMenu ({ commit }) {
-      commit('toggleSideMenu')
     }
   }
 })

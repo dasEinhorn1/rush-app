@@ -22,17 +22,12 @@ import { StatusType, Status } from '@/helpers/StatusConfig'
 export default {
   props: ['rushee'],
   components: { IconButton, FontAwesomeIcon },
-  data: function () {
-    return {
-      initialized: this.rushee.votes.user.vote !== 0
-    }
-  },
   computed: {
     votes () {
       return this.rushee.votes
     },
     userVote () {
-      return this.votes.user.vote
+      return this.votes.userVote
     },
     hasVote () {
       return this.userVote !== 0

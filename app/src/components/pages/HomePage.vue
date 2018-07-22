@@ -2,28 +2,29 @@
   <base-page>
     <div slot="header">
       <main-header @open="menuIsOpen=true">
-        <list-search class="search-bar" style="flex: 1"/>
+        <list-search class="search-bar" placeholder="Search rushees" style="flex: 1"/>
       </main-header>
       <filter-preview
         @close-filters="showFilters=false"
         @open-filters="showFilters=true"
         :menuOpen="showFilters"/>
     </div>
-    <filter-menu v-show="showFilters" @close="showFilters=false">
+    <the-rushee-filters v-show="showFilters" @close="showFilters=false">
       <filter-group class="filter-groups" name="status">
         <template slot="header">Vote Status</template>
-        <filter-input name="upForVote">Up for vote</filter-input>
-        <filter-input name="hasBid">Closing</filter-input>
-        <filter-input name="accepted">Pledges</filter-input>
+        <filter-input id="UP_FOR_VOTE"></filter-input>
+        <filter-input id="HAS_BID"></filter-input>
+        <filter-input id="ACCEPTED"></filter-input>
+        <filter-input id="BLACKBALLED"></filter-input>
       </filter-group>
-      <filter-group class="filter-groups" name="status">
+      <filter-group class="filter-groups" name="year">
         <template slot="header">Year</template>
-        <filter-input name="firstYear">1st year</filter-input>
-        <filter-input name="secondYear">2nd year</filter-input>
-        <filter-input name="thirdYear">3rd year</filter-input>
-        <filter-input name="fourthYear">4th year</filter-input>
+        <filter-input id="FIRST_YEAR"></filter-input>
+        <filter-input id="SECOND_YEAR"></filter-input>
+        <filter-input id="THIRD_YEAR"></filter-input>
+        <filter-input id="FOURTH_YEAR"></filter-input>
       </filter-group>
-    </filter-menu>
+    </the-rushee-filters>
     <side-menu slot="aside" @close="menuIsOpen=false" v-show='menuIsOpen'/>
     <rushee-list
       :rushees='getRelevantRushees'/>
@@ -38,9 +39,7 @@ import { mapGetters } from 'vuex'
 import RusheeList from '@/components/list/RusheeList'
 import ListSearch from '@/components/list/ListSearch'
 import FilterPreview from './../filter/FilterPreview'
-import FilterMenu from './../filter/FilterMenu'
-import FilterInput from './../filter/FilterInput'
-import FilterGroup from './../filter/FilterGroup'
+import TheRusheeFilters from './../filter/TheRusheeFilters'
 
 export default {
   computed: {
@@ -52,9 +51,7 @@ export default {
     MainHeader,
     SideMenu,
     BasePage,
-    FilterMenu,
-    FilterGroup,
-    FilterInput,
+    TheRusheeFilters,
     FilterPreview
   },
   data () {

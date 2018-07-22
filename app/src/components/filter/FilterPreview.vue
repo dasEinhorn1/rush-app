@@ -9,14 +9,15 @@
         class="filter-preview__filters__no-filter"><i>No Filters Applied</i></span>
       <span
         class="filter-preview__filters__filter"
-        v-for="(filter,n) in filters"
-        :key="n">{{ filter }}</span>
+        v-for="filter in filters"
+        :key="filter.id">{{ filter.name }}</span>
     </div>
   </div>
 </template>
 
 <script>
 import IconButton from '@ui/buttons/IconButton'
+import Filters from '@/helpers/Filters'
 
 export default {
   components: {
@@ -30,7 +31,7 @@ export default {
   },
   computed: {
     filters () {
-      return this.$store.state.filters
+      return this.$store.state.filters.map(id => Filters.available[id])
     },
   }
 }

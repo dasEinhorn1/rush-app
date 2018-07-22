@@ -1,5 +1,8 @@
 <template lang="html">
   <div class="rushee-list">
+    <div class="item-count" v-if="rushees.length !== 0">
+      <p>Showing {{rushees.length}} Rushees</p>
+    </div>
     <rushee-list-item
     v-for='rushee in rushees'
     :rushee='rushee'
@@ -28,12 +31,20 @@ export default {
   /* overflow-y: auto; */
   position: relative;
 }
+
+.item-count,
 .end-of-list {
   text-align: center;
   padding: 8px;
   font-style: italic;
 }
+.item-count p,
 .end-of-list p {
   margin: 0;
 }
+
+.item-count {
+  text-align: right;
+}
+
 </style>
