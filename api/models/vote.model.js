@@ -11,7 +11,7 @@ function VoteModel ( yesTotal, noTotal, userVote, bidStatus ) {
     return {
         status: status,
         total: NestedTotal(yesTotal, noTotal),
-        userVote: userVote
+        userVote: userVote || 0
     }
 }
 

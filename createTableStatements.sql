@@ -3,17 +3,18 @@ CREATE TABLE Brother(
 	Name			varchar(50) NOT NULL,
 	Password		varchar(50) NOT NULL,
 	IsCommittee		boolean NOT NULL DEFAULT 0,
-	IsAdmin		boolean NOT NULL DEFAULT 0,
+	IsAdmin			boolean NOT NULL DEFAULT 0,
 	PRIMARY KEY(Username)
 ) ENGINE=InnoDB;
 
 CREATE TABLE Rushee(
 	GTID			char(9),
-	Name			varchar(50) NOT NULL,
+	FirstName		varchar(50) NOT NULL,
+	LastName		varchar(50) NOT NULL,
 	PhoneNumber		char(10),
-	Picture			VARCHAR(100),
+	Picture			varchar(100),
 	Year			int NOT NULL CHECK (Year >= 1 AND Year <= 5),
-	Major			varchar(50),
+	Major			varchar(50) NOT NULL,
 	PointOfContact	varchar(50),
 	BidStatus		ENUM('none', 'has-bid', 'accepted-bid'),
 	YesTotal		int,
