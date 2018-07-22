@@ -17,6 +17,7 @@
   "scripts": {
     "dev-app": "webpack-dev-server --inline --progress --config app/build/webpack.dev.conf.js",
     "start-app": "npm run dev",
+    "dev": "npm run dev-app",
     "unit-app": "cross-env BABEL_ENV=test karma start app/test/unit/karma.conf.js --single-run",
     "e2e-app": "node app/test/e2e/runner.js",
     "test-app": "npm run unit && npm run e2e",
@@ -28,6 +29,7 @@
     "@fortawesome/fontawesome-free-solid": "^5.0.13",
     "@fortawesome/vue-fontawesome": "0.0.22",
     "express": "^4.16.3",
+    "lodash.debounce": "^4.0.8",
     "mysql": "^2.15.0",
     "vue": "^2.5.16",
     "vue-router": "^3.0.1",

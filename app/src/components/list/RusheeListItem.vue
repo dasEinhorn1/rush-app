@@ -1,21 +1,26 @@
 <template lang="html">
   <div class='list-item'>
-    <rushee-profile-pic
-      style="width: 60px; height: 60px;"
-      :rushee='rushee'/>
-    <div class='main'>
-      <h3>{{rushee.firstName}} {{rushee.lastName}}</h3>
-      <p>Votes: <span style='color:green'>{{yesVotes}}</span> | <span style='color:red'>{{noVotes}}</span></p>
-    </div>
     <list-vote-ticker
+    style="width: 40px; height: 60px;"
+    :rushee='rushee'/>
+    <rushee-profile-pic
+      @click="goToRusheePage"
       style="width: 60px; height: 60px;"
       :rushee='rushee'/>
+    <div class='main'
+      @click="goToRusheePage">
+      <h3>{{rushee.firstName}} {{rushee.lastName}}</h3>
+      <div class="main__details">
+        <p class="main__details__detail">{{ rushee.year | yearToText }}</p>
+        <p class="main__details__detail">{{ rushee.major }}</p>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import RusheeProfilePic from '@/components/partials/RusheeProfilePic'
-import ListVoteTicker from '@/components/partials/ListVoteTicker'
+import RusheeProfilePic from '../RusheeProfilePic'
+import ListVoteTicker from './ListVoteTicker'
 
 export default {
   props: ['rushee'],
@@ -25,14 +30,21 @@ export default {
     },
     noVotes: function () {
       return this.rushee.votes.totals.no
-    },
-    totalVotes: function () {
-      return this.yesVotes() + this.noVotes()
+    }
+  },
+  filters: {
+    yearToText (val) {
+      return ['1st year', '2nd year', '3rd year', '4th year'][val - 1]
     }
   },
   components: {
     'rushee-profile-pic': RusheeProfilePic,
     'list-vote-ticker': ListVoteTicker
+  },
+  methods: {
+    goToRusheePage () {
+      this.$router.push({ path: `rushees/${this.rushee.id}` })
+    }
   }
 }
 </script>
@@ -40,29 +52,34 @@ export default {
 <style scoped>
   .list-item {
     display: flex;
-    width: calc(100% - 6px);
     overflow: hidden;
     box-sizing: border-box;
     margin: 5px;
+    border-radius: 4px;
     box-shadow: 0px 0px 3px 1px grey;
   }
   .list-item .main {
     flex: 1;
     display: flex;
     flex-direction: column;
-    padding-left: 1em;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding: 5px 1em;
     font-size: .8em;
   }
+
+  .main__details {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .main__details__detail {
+    flex: 0 0 auto;
+    margin: 0;
+    vertical-align: middle;
+  }
+
   .list-item .main h3 {
     margin: 0;
     flex: 0 1 30px;
-  }
-  .list-item .main p {
-    margin: 0;
-    flex: 1;
-    vertical-align:middle;
   }
   .list-item list-vote-ticker {
     flex: 1;
