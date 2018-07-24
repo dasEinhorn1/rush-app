@@ -25,34 +25,34 @@ VALUES ("jsteffey", "Joseph Steffey", "password", false, false);
 /* ===================================================== */
 
 INSERT INTO Rushee
-VALUES ("123456789", "Bob", "Bill", "1234567892", "img1.png", 2, "IE", null, "none", 0, 0);
+VALUES ("123456789", "Bob", "Bill", "1234567892", "img1.png", 2, "IE", null, "none");
 
 INSERT INTO Rushee
-VALUES ("902389218", "Elon", "Musk", "7862345678", "img2.png", 4, "AE", null, "has-bid", 0, 0);
+VALUES ("902389218", "Elon", "Musk", "7862345678", "img2.png", 4, "AE", null, "has-bid");
 
 INSERT INTO Rushee
-VALUES ("123896578", "Jeff", "Kaplan", "6304567890", "img3.png", 1, "CS", "ahayward", "accepted-bid", 1, 0);
+VALUES ("123896578", "Jeff", "Kaplan", "6304567890", "img3.png", 1, "CS", "ahayward", "accepted-bid");
 
 INSERT INTO Rushee
-VALUES ("234567890", "Fuckboy", "McGee", "4206906969", "img4.png", 3, "CivE", "bglowniak", "none", 1, 0);
+VALUES ("234567890", "Fuckboy", "McGee", "4206906969", "img4.png", 3, "CivE", "bglowniak", "none");
 
 INSERT INTO Rushee
-VALUES ("890234568", "Bill", "Hader", "6969696969", "img5.png", 2, "LMC", "gpalm", "has-bid", 0, 0);
+VALUES ("890234568", "Bill", "Hader", "6969696969", "img5.png", 2, "LMC", "gpalm", "has-bid");
 
 INSERT INTO Rushee
-VALUES ("567890456", "Donald", "Trump", "1111111111", "img6.png", 1, "BME", "abayon", "none", 0, 0);
+VALUES ("567890456", "Donald", "Trump", "1111111111", "img6.png", 1, "BME", "abayon", "none");
 
 INSERT INTO Rushee
-VALUES ("555555555", "Fuckatron", "2000", "1234567890", "img7.png", 5, "CS", null, "none", 1, 5);
+VALUES ("555555555", "Fuckatron", "2000", "1234567890", "img7.png", 5, "CS", null, "none");
 
 INSERT INTO Rushee
-VALUES ("903456789", "Godzilla", "LastName", "4568901233", "img8.png", 4, "ChemE", null, "none", 1, 0);
+VALUES ("903456789", "Godzilla", "LastName", "4568901233", "img8.png", 4, "ChemE", null, "none");
 
 INSERT INTO Rushee
-VALUES ("123890234", "Hollow", "Knight", "4204204200", "img9.png", 2, "AE", "aberger", "accepted-bid", 0, 1);
+VALUES ("123890234", "Hollow", "Knight", "4204204200", "img9.png", 2, "AE", "aberger", "accepted-bid"1);
 
 INSERT INTO Rushee
-VALUES ("111111111", "Shit", "Licker", "1133339999", "img10.png", 1, "NRE", "gautry", "has-bid", 2, 0);
+VALUES ("111111111", "Shit", "Licker", "1133339999", "img10.png", 1, "NRE", "gautry", "has-bid");
 
 /* ===================================================== */
 
