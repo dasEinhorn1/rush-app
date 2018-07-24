@@ -7,7 +7,7 @@ function fakeRusheeList (count = 10) {
   return Rushee.fakeMany(count, 0, { randomizeVotes: true })
 }
 
-const fakeRushees = fakeRusheeList(500)
+const fakeRushees = fakeRusheeList(100)
 
 export default {
   getRushees: (queryParams) => {
@@ -53,26 +53,26 @@ export default {
           return rushee.id === id
         })
         if (rushee) {
-          if (vote !== rushee.votes.user.vote) {
+          if (vote !== rushee.votes.userVote) {
             console.log(vote)
             if (vote === 1) {
               rushee.votes.totals.yes++
-              if (rushee.votes.user.vote === -1) {
+              if (rushee.votes.userVote === -1) {
                 rushee.votes.totals.no--
               }
             } else if (vote === 0) {
-              if (rushee.votes.user.vote === 1) {
+              if (rushee.votes.userVote === 1) {
                 rushee.votes.totals.yes--
-              } else if (rushee.votes.user.vote === -1) {
+              } else if (rushee.votes.userVote === -1) {
                 rushee.votes.totals.no--
               }
             } else if (vote === -1) {
-              if (rushee.votes.user.vote === 1) {
+              if (rushee.votes.userVote === 1) {
                 rushee.votes.totals.yes--
               }
               rushee.votes.totals.no++
             }
-            rushee.votes.user.vote = vote
+            rushee.votes.userVote = vote
             rushee.votes.status = StatusType.fromVotes(rushee.votes.totals.yes,
               rushee.votes.totals.no)
           }

@@ -1,9 +1,10 @@
 <template lang="html">
-  <div class='main-header'>
+  <div class='back-header'>
     <icon-button
-      @click="$emit('open')"
+      @click="back"
       size="1.5em"
-      icon="bars"/>
+      icon="arrow-left"
+      style="text-align: left"/>
     <slot><h1>Header Default</h1></slot>
   </div>
 </template>
@@ -13,12 +14,17 @@ import IconButton from '@ui/buttons/IconButton'
 export default {
   components: {
     IconButton
+  },
+  methods: {
+    back () {
+      this.$router.go(-1)
+    }
   }
 }
 </script>
 
 <style scoped>
-.main-header {
+.back-header {
   background-color: #007A33;
   color: #FFFEF6;
   box-shadow: 0px 0px 4px 0px black;
@@ -28,9 +34,10 @@ export default {
   box-sizing: border-box;
   font-size: .8em;
   display: flex;
+  padding: 8px;
   align-items: center;
 }
-.main-header h1 {
+.back-header>>> h1 {
   margin: 0
 }
 </style>

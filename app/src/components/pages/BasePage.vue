@@ -1,5 +1,5 @@
 <template lang="html">
-  <div style="padding-top:100px;">
+  <div>
     <header><slot name="header"></slot></header>
     <main><slot></slot></main>
     <aside><slot name="aside"></slot></aside>
@@ -26,12 +26,12 @@ header {
   position: fixed;
   width: 100%;
   top:0;
-  z-index: 2;
+  z-index: 3;
   background-color: white;
   box-shadow: 0px 0px 4px 0px black;
 }
 
 aside {
-  z-index: 3;
+  z-index: 4;
 }
 </style>

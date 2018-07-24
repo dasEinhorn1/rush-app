@@ -1,15 +1,18 @@
 <template lang="html">
-  <base-page>
+  <base-page style="padding-top:90px;">
     <div slot="header">
       <main-header @open="menuIsOpen=true">
-        <list-search class="search-bar" placeholder="Search rushees" style="flex: 1"/>
+        <list-search class="search-bar" placeholder="Search rushees" style="flex: 1; padding-right: 8px"/>
       </main-header>
       <filter-preview
         @close-filters="showFilters=false"
         @open-filters="showFilters=true"
         :menuOpen="showFilters"/>
     </div>
-    <the-rushee-filters v-show="showFilters" @close="showFilters=false">
+    <side-menu slot="aside" @close="menuIsOpen=false" v-show='menuIsOpen'/>
+    <the-rushee-filters
+      v-show="showFilters"
+      @close="showFilters=false">
       <filter-group class="filter-groups" name="status">
         <template slot="header">Vote Status</template>
         <filter-input id="UP_FOR_VOTE"></filter-input>
@@ -25,7 +28,6 @@
         <filter-input id="FOURTH_YEAR"></filter-input>
       </filter-group>
     </the-rushee-filters>
-    <side-menu slot="aside" @close="menuIsOpen=false" v-show='menuIsOpen'/>
     <rushee-list
       :rushees='getRelevantRushees'/>
   </base-page>

@@ -1,9 +1,9 @@
-import { faCheck, faCircle, faExclamation, faAngleDoubleRight, faBan } from '@fortawesome/fontawesome-free-solid'
+import { faCheck, faCircle, faExclamation, faBolt, faBan } from '@fortawesome/fontawesome-free-solid'
 import { randInt } from '@/helpers/Random'
 
-const green = 'green'
-const red = 'red'
-const blue = 'blue'
+const green = '#007A33'
+const red = '#FF381E'
+const blue = '#2F91AF'
 const white = 'white'
 
 const thresholds = {
@@ -56,7 +56,7 @@ STATUS_CONFIGS[StatusType.ELIGIBLE] = {
 }
 STATUS_CONFIGS[StatusType.FAST_TRACK] = {
   ...DEFAULT_CONFIG,
-  icon: faAngleDoubleRight,
+  icon: faBolt,
   backgroundColor: blue
 }
 STATUS_CONFIGS[StatusType.BLACK_BALL] = {

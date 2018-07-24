@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="filter-group">
-    <h4 class="header"><slot name="header">{{ name | readable }}</slot></h4>
-    <div class='filters'>
+    <h4 class="header"><slot name="header"></slot></h4>
+    <div class='filters' :style="{'border-color': groupColor }">
       <slot></slot>
     </div>
   </div>
@@ -9,6 +9,7 @@
 
 <script>
 import FilterInput from './FilterInput'
+import Filters from '@/helpers/Filters'
 export default {
   components: {
     FilterInput
@@ -25,10 +26,15 @@ export default {
         .replace(/^[a-z]/, (m) => m.toUpperCase())
     }
   },
+  computed: {
+    groupColor () {
+      return Filters.colors[this.name]
+    }
+  },
   methods: {
     filterValue (filterName) {
       return this.value.find(f => f.name === this.filterName)
-    }
+    },
   },
   created () {
     const vm = this
@@ -40,9 +46,12 @@ export default {
 
 <style lang="css">
 .header {
-  margin-bottom: 8px;
+  margin: 8px 0;
 }
 .filters {
+  border-left: 4px solid black;
   padding-left: 8px;
+  margin-left: 8px;
+  box-sizing: border-box;
 }
 </style>

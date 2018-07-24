@@ -23,9 +23,7 @@ function _fake (yes, no, user) {
       yes: yes || 0,
       no: no || 0
     },
-    user: {
-      vote: user || 0
-    }
+    userVote: user || 0
   }
 }
 

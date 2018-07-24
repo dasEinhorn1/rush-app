@@ -7,10 +7,11 @@
       <span
         v-show="filters.length === 0"
         class="filter-preview__filters__no-filter"><i>No Filters Applied</i></span>
-      <span
+      <filter-preview-item
         class="filter-preview__filters__filter"
         v-for="filter in filters"
-        :key="filter.id">{{ filter.name }}</span>
+        :key="filter.id"
+        :filter='filter'/>
     </div>
   </div>
 </template>
@@ -18,10 +19,11 @@
 <script>
 import IconButton from '@ui/buttons/IconButton'
 import Filters from '@/helpers/Filters'
-
+import FilterPreviewItem from './FilterPreviewItem'
 export default {
   components: {
-    IconButton
+    IconButton,
+    FilterPreviewItem
   },
   props: {
     menuOpen: {
@@ -46,11 +48,11 @@ export default {
 .filter-preview__filters {
   display: flex;
   overflow-x: auto;
-  padding: -4px;
+  margin-right: 8px;
 }
-.filter-preview__filters__filter,
+
 .filter-preview__filters__no-filter {
-  display: block;
+  white-space: nowrap;
   margin: 4px;
   padding: 4px;
 }

@@ -32,7 +32,7 @@ export default {
 <style scoped>
 label {
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: row nowrap;
   align-items: center;
   justify-content: space-between;
   /* margin-bottom: 4px; */

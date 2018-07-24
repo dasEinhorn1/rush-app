@@ -3,7 +3,7 @@
     v-if='status != "_"'
     class="status-icon icon-bg"
     :style='{backgroundColor: bgColor, color: color}'>
-    <font-awesome-icon transform='shrink-3' :icon='icon'/>
+    <font-awesome-icon transform='shrink-2' :icon='icon'/>
   </div>
 </template>
 

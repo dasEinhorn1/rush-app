@@ -1,6 +1,5 @@
 <template lang="html">
   <div class="filter-menu">
-    <!-- <icon-button class="close-btn" icon="times" @click="$emit('close')"/> -->
     <slot></slot>
   </div>
 </template>
@@ -18,8 +17,9 @@ export default {
 <style scoped>
 .filter-menu {
   display: flex;
-  position: relative;
+  flex-flow: column;
   padding-bottom: 8px;
+  /* padding-right: 8px; */
 }
 /* .close-btn {
   display: block;
@@ -32,6 +32,7 @@ export default {
   transform: translateX(-100%);
 } */
 .filter-menu >>> .filter-group {
-  flex: 0 1 150px;
+  flex: 1;
+  padding-top: 8px;
 }
 </style>

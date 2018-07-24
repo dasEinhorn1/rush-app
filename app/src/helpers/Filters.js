@@ -65,6 +65,10 @@ const applyAll = (groupedFilters) => r => {  // check each item individually
 export default {
   available: filters,
   ids: filterIds,
+  colors: {
+    status: "#3D2F8C",
+    year: "#EAAA00"
+  },
   default: ["UP_FOR_VOTE"],
   toGrouped,
   applyAll

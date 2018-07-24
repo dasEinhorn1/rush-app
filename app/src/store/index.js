@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import RushApi from '@/helpers/RushApi'
+import RushApi from '@/helpers/RushApiMock'
 
 import Filters from '@/helpers/Filters'
 
@@ -72,7 +72,8 @@ export const store = new Vuex.Store({
     },
     ["REMOVE_FILTER"] (state, payload) {
       const { id } = payload
-      state.filters = state.filters.filter(f => f.id !== id)
+      console.log(id);
+      state.filters = state.filters.filter(fId => fId !== id)
     },
   },
   actions: {

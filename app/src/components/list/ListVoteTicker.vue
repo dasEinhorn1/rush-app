@@ -87,15 +87,16 @@ export default {
     height: 50%;
     width: 100%;
     box-sizing: border-box;
+    font-size: 1em;
   }
 
   button.yes.active {
-    color: green;
+    color: #007A33;
     /* background-color: green; */
   }
 
   button.no.active {
-    color: red;
+    color: #FF381E;
     /* background-color: red; */
   }
 </style>

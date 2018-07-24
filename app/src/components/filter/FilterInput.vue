@@ -1,21 +1,29 @@
 <template lang="html">
-  <label style="display:block">
+  <label>
     <input
       type='checkbox'
       :name='id'
       :value='id'
       v-bind='$attrs'
       v-model='filters'>
-    {{ filter.name }} ({{ affectedNumber }})
+    <div class="checkmark"><font-awesome-icon class='check' icon="check"/></div>
+    <span class="label-text">
+      {{ filter.name }}
+      ({{ affectedNumber }})
+    </span>
   </label>
 </template>
 
 <script>
 import Filters from '@/helpers/Filters'
+import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 
 export default {
   name: "FilterInput",
   inheritAttrs: false,
+  components: {
+    FontAwesomeIcon
+  },
   props: {
     id: {
       type: String,
@@ -51,5 +59,49 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style scoped>
+label {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  position: relative;
+  padding: 4px;
+}
+.label-text {
+  display: block;
+  flex: 1
+}
+input {
+  position: absolute;
+  opacity: 0;
+}
+.checkmark {
+  background-color: #eee;
+  height: 25px;
+  flex: 0 0 25px;
+  margin-right: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+
+.checkmark .check {
+  display: none;
+  flex: 1;
+  color: white;
+}
+
+label:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+label input:checked ~ .checkmark .check {
+  display: block;
+}
+
+label input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
 </style>
