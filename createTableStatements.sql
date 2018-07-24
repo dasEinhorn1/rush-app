@@ -17,11 +17,8 @@ CREATE TABLE Rushee(
 	Major			varchar(50) NOT NULL,
 	PointOfContact	varchar(50),
 	BidStatus		ENUM('none', 'has-bid', 'accepted-bid'),
-	YesTotal		int,
-	NoTotal			int,
 	PRIMARY KEY(GTID),
 	UNIQUE(PhoneNumber),
-	UNIQUE(Picture),
 	FOREIGN KEY (PointOfContact) REFERENCES Brother(Username)
 		ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB;
